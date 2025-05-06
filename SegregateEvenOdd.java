@@ -1,15 +1,16 @@
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class SegregateEvenOdd {
     public static void main(String[] args) {
         // Sample input LinkedList
         LinkedList<Integer> numbers = new LinkedList<>();
-        numbers.add(10);
-        numbers.add(21);
-        numbers.add(32);
-        numbers.add(43);
-        numbers.add(54);
-        numbers.add(65);
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for(int i=0; i<n; i++) {
+            int a = sc.nextInt();
+            numbers.add(a);
+        }
         
         // LinkedLists to store even and odd numbers
         LinkedList<Integer> evenNumbers = new LinkedList<>();
