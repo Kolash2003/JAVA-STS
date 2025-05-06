@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Bellman {
+public class Bellman { 
     
     static class Edge {
         int src, dest, weight;
