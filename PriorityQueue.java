@@ -3,48 +3,50 @@ import java.util.*;
 public class PriorityQueue {
     static class Node {
         int data, priority;
-        Node next;
-        Node(int d, int p) { data = d; priority = p; }
-    }
-    
-    private static Node head;
-    
-    private static void push(int data, int priority) {
-        Node node = new Node(data, priority);
-        if (head == null) {
-            head = node;
-            return;
-        }
-        
-        Node current = head, prev = null;
-        while (current != null && current.priority >= priority) {
-            prev = current;
-            current = current.next;
-        }
-        
-        if (prev == null) {
-            node.next = head;
-            head = node;
-        } else {
-            node.next = prev.next;
-            prev.next = node;
+        Node(int d, int p) {
+            data = d;
+            priority = p;
         }
     }
-    
-    private static int peek() { return head != null ? head.data : -1; }
-    
-    private static int pop() {
-        if (head == null) return -1;
-        int data = head.data;
-        head = head.next;
-        return data;
+
+    static List<Node> list = new ArrayList<>();
+
+    static void push(int data, int priority) {
+        list.add(new Node(data, priority));
     }
-    
+
+    static int peek() {
+        if (list.isEmpty()) return -1;
+        Node maxNode = list.get(0);
+        for (Node node : list) {
+            if (node.priority > maxNode.priority) {
+                maxNode = node;
+            }
+        }
+        return maxNode.data;
+    }
+
+    static int pop() {
+        if (list.isEmpty()) return -1;
+        int maxIndex = 0;
+        for (int i = 1; i < list.size(); i++) {
+            if (list.get(i).priority > list.get(maxIndex).priority) {
+                maxIndex = i;
+            }
+        }
+        return list.remove(maxIndex).data;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        while (n-- > 0) push(sc.nextInt(), sc.nextInt());
-        
+
+        while (n-- > 0) {
+            int data = sc.nextInt();
+            int priority = sc.nextInt();
+            push(data, priority);
+        }
+
         System.out.println(peek());
         System.out.println(pop());
         System.out.println(pop());
